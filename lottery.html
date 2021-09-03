@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="lottery">
+    <meta name="author" content="Z">
+    <title>转盘抽奖</title>
+    <link rel="stylesheet" type="text/css" href='https://fonts.googleapis.com/css?family=Raleway:900&display=swap' />
+    <link rel="stylesheet" type="text/css" href='page.css' />
+</head>
+
+<body>
+    <input type="button" id="open" value="登录">
+    <div id="container">
+        <span id="text1"></span>
+        <span id="text2"></span>
+    </div>
+    <svg id="filters">
+        <defs>
+            <filter id="threshold">
+                <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0
+                                        0 1 0 0 0
+                                        0 0 1 0 0
+                                        0 0 0 255 -140" />
+            </filter>
+        </defs>
+    </svg>
+    <p class="Text" id="original">This is a lottery</p>
+    <p class="Text" id="tips">click the text above</p>
+    <script type="text/javascript" src="animation.js"></script>
+    <div id="bg"><img src="pointer.png" alt="pointer"><img src="turntable.png" alt="turntable"></div>
+    <script>
+        var oPointer = document.getElementsByTagName("img")[0];
+        var oTurntable = document.getElementsByTagName("img")[1];
+        var pools = 6; //number of sections
+        var each = 360 / pools; // each section is 60 deg 
+        var num = 0; //转圈结束后停留的度数
+        var offOn = true; //是否正在抽奖
+        oPointer.onclick = function () {
+
+            if (offOn) {
+
+                oTurntable.style.transform = "rotate(0deg)";
+                offOn = !offOn;
+                ratating();
+            }
+        }
+        function getRandom(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+        function ratating() {
+
+            var timer = null;
+            var rdm = 0;
+            clearInterval(timer);
+            timer = setInterval(function () {
+
+                let base = 1800;
+                let result = getRandom(-30, 330);
+                let rdm = -(base + result)// 逆时针旋转
+
+                oTurntable.style.transform = "rotate(" + rdm + "deg)";
+                clearInterval(timer);
+                setTimeout(function () {
+
+                    offOn = !offOn;
+                    gifts = {
+                        "1": {
+                            angleStart: -30,
+                            angleEnd: each - 30,
+                            tips: "恭喜您获得二等奖~"
+                        },
+                        "2": {
+                            angleStart: each - 30 + 1,
+                            angleEnd: each * 2 - 30,
+                            tips: "好可惜您没中，再试一次吧"
+                        },
+                        "3": {
+                            angleStart: each * 2 - 30 + 1,
+                            angleEnd: each * 3 - 30,
+                            tips: "恭喜您获得一等奖~"
+                        },
+                        "4": {
+                            angleStart: each * 3 - 30 + 1,
+                            angleEnd: each * 4 - 30,
+                            tips: "好可惜您没中，再试一次吧"
+                        },
+                        "5": {
+                            angleStart: each * 4 - 30 + 1,
+                            angleEnd: each * 5 - 30,
+                            tips: "恭喜您获得三等奖~"
+                        },
+                        "6": {
+                            angleStart: each * 5 - 30 + 1,
+                            angleEnd: each * 6 - 30,
+                            tips: "好可惜您没中，再试一次吧"
+                        }
+                    }
+                    for (var key in gifts) {
+                        // 最后一圈的角度落在哪个奖品区间
+                        if (gifts[key].angleStart <= result && result <= gifts[key].angleEnd) {
+                            // 得到奖品的key值
+                            alert(gifts[key].tips);
+                        }
+                    }
+                }, 4000);
+
+            }, 30);
+        }
+
+    </script>
+    <div id="newPage">
+        <!-- 背景黑色遮罩 -->
+        <div id="hidden"></div>
+        <div id="box">
+            <strong id="close">关闭</strong>
+            <span>输入账号：<input type="text" placeholder="输入账号"></span>
+            <span>输入密码：<input type="password" placeholder="输入密码"></span>
+            <input type="button" value="登录" id="login">
+        </div>
+    </div>
+    <script type="text/javascript" src="NewPage.js"></script>
+</body>
+
+</html>

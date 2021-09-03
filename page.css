@@ -1,0 +1,177 @@
+body {
+    margin: 0px;
+    background-color: antiquewhite;
+}
+
+#bg {
+
+    width: 650px;
+    height: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+img[src^="pointer"] {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    z-index: 10;
+    top: 200px;
+    left: 260px;
+}
+
+img[src^="turntable"] {
+
+    position: absolute;
+    z-index: 5;
+    top: 60px;
+    left: 100px;
+    transition: all 4s;
+    transition-timing-function: ease-in-out;
+}
+
+#container {
+    display: inline-block;
+    position: relative;
+    margin: auto;
+    height: 80pt;
+    top: 0;
+    bottom: 0;
+    left: 40%;
+    filter: url(#threshold) blur(0.6px);
+}
+
+#filters {
+    display: inline-block;
+}
+
+#text1,
+#text2 {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    display: inline-block;
+
+    font-family: 'Raleway', sans-serif;
+    font-size: 80pt;
+
+    text-align: center;
+
+    user-select: none;
+}
+
+p {
+    text-align: center;
+}
+
+.original {
+    font-family: 'Raleway', sans-serif;
+    font-size: 80pt;
+}
+
+/* NEW PAGE */
+
+#newPage {
+    display: flex;
+    justify-content: center;
+    z-index:30;
+}
+
+/* 打开按钮 */
+#open {
+    background-color: #fdba00;
+    border: none;
+    height: 30px;
+    width: 200px;
+    border-radius: 10px;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    right:0;
+}
+
+#open:hover {
+    background-color: #fd8f0081;
+}
+
+/* 背景遮罩 */
+#hidden {
+    z-index:30;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    opacity: 0.3;
+    display: none;
+}
+/* 盒子 */
+#box {
+    z-index:30;
+    color: #fff;
+    width: 400px;
+    height: 200px;
+    background-color: #fdba00;
+    display: none;
+    flex-direction: column;
+    border-radius: 10px;
+    align-items: center;
+    padding-top: 50px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 200px;
+    cursor: move;
+}
+/* 关闭按钮 */
+#close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-weight: normal;
+    display: block;
+    width: 50px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border-radius: 20px;
+    color: white;
+}
+
+#close:hover {
+    background-color:#fd8f0081;
+    ;
+    cursor: pointer;
+}
+/* 输入框 */
+#box input {
+    width: 200px;
+    height: 25px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    background-color: #fd8f00;
+    color: #fff;
+}
+/* 改变placeholder的值 */
+#box input::-webkit-input-placeholder {
+    color: rgb(255, 255, 255);
+    opacity: 0.4;
+}
+
+#box input:first-child {
+    margin-bottom: 20px;
+}
+/* 登录按钮 */
+#box #login {
+    cursor: pointer;
+    width: 300px;
+    height: 30px;
+    background-color: #fd8f00;
+}
+
+#box #login:hover {
+    background-color: #f1cd008f;
+}
